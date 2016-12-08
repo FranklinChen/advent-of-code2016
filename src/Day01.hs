@@ -32,8 +32,33 @@ walkFrom state path =
   let (_, point) = foldl' step state path
   in point
 
+-- | Step through one segment, first changing direction.
 step :: State -> Segment -> State
-step = error "step"
+step (direction, point) (turn, forward) =
+  let direction' = newDirection direction turn
+  in (direction', newPoint point (move direction' forward))
+
+-- | Change direction when turning.
+newDirection :: Direction -> Turn -> Direction
+newDirection North L = West
+newDirection North R = East
+newDirection East L = North
+newDirection East R = South
+newDirection South L = East
+newDirection South R = West
+newDirection West L = South
+newDirection West R = North
+
+-- | New point from moving.
+newPoint :: Point -> (Int, Int) -> Point
+newPoint (x, y) (dx, dy) = (x + dx, y + dy)
+
+-- | Calculate how much to move based on direction.
+move :: Direction -> Int -> (Int, Int)
+move North d = (0, d)
+move East d = (d, 0)
+move South d = (0, -d)
+move West d = (-d, 0)
 
 -- | State carried while walking.
 type State = (Direction, Point)
