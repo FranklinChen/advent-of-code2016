@@ -1,0 +1,35 @@
+name:                advent-of-code2016
+version:             0.1.0.0
+synopsis:            Advent of Code 2016
+description:         Please see README.md
+homepage:            http://github.com/FranklinChen/advent-of-code
+license:             BSD3
+license-file:        LICENSE
+author:              Franklin Chen
+maintainer:          franklinchen@franklinchen.com
+copyright:           2015
+category:            test
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+  hs-source-dirs:      src
+  build-depends:       base >= 4.7 && < 5
+
+test-suite spec
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+                     , src
+  main-is:             Spec.hs
+  build-depends:       base
+                     , hspec
+                     , QuickCheck
+                     
+source-repository head
+  type:     git
+  location: https://github.com/FranklinChen/advent-of-code2016
