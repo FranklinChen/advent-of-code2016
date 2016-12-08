@@ -3,6 +3,7 @@ module Day01
 where
 
 import Control.Arrow ((>>>))
+import Data.List (foldl')
 
 main :: IO Int
 main = distance <$> readFile "inputs/day01.txt"
@@ -25,8 +26,14 @@ data Turn = L | R
 walk :: [Segment] -> Point
 walk = walkFrom initState
 
+-- | Iterate through each segment.
 walkFrom :: State -> [Segment] -> Point
-walkFrom = error "walkFrom"
+walkFrom state path =
+  let (_, point) = foldl' step state path
+  in point
+
+step :: State -> Segment -> State
+step = error "step"
 
 -- | State carried while walking.
 type State = (Direction, Point)
