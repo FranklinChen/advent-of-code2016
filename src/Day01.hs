@@ -1,6 +1,4 @@
-module Day01
-
-where
+module Day01 where
 
 import Control.Arrow ((>>>))
 import Data.List (foldl')
@@ -22,7 +20,7 @@ parse :: String -> [Segment]
 parse s =
   case parseMaybe segmentsP s of
     Just segments -> segments
-    Nothing -> error "foo"
+    Nothing -> error "Day01.parse"
 
 -- | Use Megaparsec.
 segmentsP :: Parser [Segment]
