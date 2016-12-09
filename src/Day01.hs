@@ -5,6 +5,11 @@ where
 import Control.Arrow ((>>>))
 import Data.List (foldl')
 
+import Text.Megaparsec ((<|>), sepBy, parseMaybe)
+import Text.Megaparsec.Char (char, space)
+import Text.Megaparsec.String (Parser)
+import qualified Text.Megaparsec.Lexer as L
+
 main :: IO Int
 main = distance <$> readFile "inputs/day01.txt"
 
@@ -12,8 +17,28 @@ main = distance <$> readFile "inputs/day01.txt"
 distance :: String -> Int
 distance = parse >>> walk >>> shortestDistance
 
+-- | Return segments if parse succeeds, else just crash for simplicity.
 parse :: String -> [Segment]
-parse = error "parse"
+parse s =
+  case parseMaybe segmentsP s of
+    Just segments -> segments
+    Nothing -> error "foo"
+
+-- | Use Megaparsec.
+segmentsP :: Parser [Segment]
+segmentsP = space
+            *> segmentP `sepBy` (char ',' <* space)
+            <* space
+
+segmentP :: Parser Segment
+segmentP = (,) <$> turnP <*> forwardP
+
+turnP :: Parser Turn
+turnP = char 'L' *> pure L
+    <|> char 'R' *> pure R
+
+forwardP :: Parser Int
+forwardP = fromInteger <$> L.integer
 
 -- | Which way to turn, then how many blocks forward to move.
 type Segment = (Turn, Int)
