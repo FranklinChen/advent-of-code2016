@@ -2,7 +2,7 @@ name:                advent-of-code2016
 version:             0.1.0.0
 synopsis:            Advent of Code 2016
 description:         Please see README.md
-homepage:            http://github.com/FranklinChen/advent-of-code
+homepage:            http://github.com/FranklinChen/advent-of-code2016
 license:             BSD3
 license-file:        LICENSE
 author:              Franklin Chen
