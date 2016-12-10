@@ -10,18 +10,9 @@ import Text.Megaparsec.String (Parser)
 import Data.Char (intToDigit)
 
 main :: IO String
-main = run <$> readFile "inputs/day02.txt"
-
--- | Pipeline.
-run :: String -> String
-run = parse >>> walk
-
--- | Return segments if parse succeeds, else just crash for simplicity.
-parse :: String -> [Segment]
-parse s =
-  case parseMaybe segmentsP s of
-    Just segments -> segments
-    Nothing -> error "Day02.parse"
+main = do
+  Just segments <- parseMaybe segmentsP <$> readFile "inputs/day02.txt"
+  return (walk segments)
 
 type Segment = [Move]
 

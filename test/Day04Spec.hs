@@ -39,17 +39,16 @@ examples =
   ]
 
 spec :: Spec
-spec =
-  describe "Day04" $ do
-    describe "parse" $ do
-      for_ examples $ \e ->
-        it (unparsed e) $ do
-          parseMaybe roomP (unparsed e) `shouldBe` Just (room e)
-    describe "calculateChecksum" $ do
-      for_ examples $ \e ->
-        it (unparsed e) $ do
-          calculateChecksum (room e) `shouldBe` actualChecksum e
-    describe "isRealRoom" $ do
-      for_ examples $ \e ->
-        it (unparsed e) $ do
-          isRealRoom (room e) `shouldBe` isReal e
+spec = do
+  describe "parse" $ do
+    for_ examples $ \e ->
+      it (unparsed e) $ do
+        parseMaybe roomP (unparsed e) `shouldBe` Just (room e)
+  describe "calculateChecksum" $ do
+    for_ examples $ \e ->
+      it (unparsed e) $ do
+        calculateChecksum (room e) `shouldBe` actualChecksum e
+  describe "isRealRoom" $ do
+    for_ examples $ \e ->
+      it (unparsed e) $ do
+        isRealRoom (room e) `shouldBe` isReal e

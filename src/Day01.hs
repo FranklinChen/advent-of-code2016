@@ -9,18 +9,13 @@ import Text.Megaparsec.String (Parser)
 import qualified Text.Megaparsec.Lexer as L
 
 main :: IO Int
-main = distance <$> readFile "inputs/day01.txt"
+main = do
+  Just segments <- parseMaybe segmentsP <$> readFile "inputs/day01.txt"
+  return (distance segments)
 
 -- | Pipeline.
-distance :: String -> Int
-distance = parse >>> walk >>> shortestDistance
-
--- | Return segments if parse succeeds, else just crash for simplicity.
-parse :: String -> [Segment]
-parse s =
-  case parseMaybe segmentsP s of
-    Just segments -> segments
-    Nothing -> error "Day01.parse"
+distance :: [Segment] -> Int
+distance = walk >>> shortestDistance
 
 -- | Use Megaparsec.
 segmentsP :: Parser [Segment]

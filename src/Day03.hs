@@ -8,21 +8,14 @@ import Text.Megaparsec.String (Parser)
 import qualified Text.Megaparsec.Lexer as L
 
 main :: IO Int
-main = numPossibleTriangles <$> readFile "inputs/day03.txt"
-
-numPossibleTriangles :: String -> Int
-numPossibleTriangles = parse >>> filter isPossibleTriangle >>> length
-
--- | Return triples if parse succeeds, else just crash for simplicity.
---
--- For robustness, parse each side into arbitrary-precision Integer.
-parse :: String -> [Triple Integer]
-parse s =
-  case parseMaybe triplesP s of
-    Just triples -> triples
-    Nothing -> error "Day03.parse"
+main = do
+  Just triples <- parseMaybe triplesP <$> readFile "inputs/day03.txt"
+  return (numPossibleTriangles triples)
 
 type Triple a = (a, a, a)
+
+numPossibleTriangles :: [Triple Integer] -> Int
+numPossibleTriangles = filter isPossibleTriangle >>> length
 
 triplesP :: Parser [Triple Integer]
 triplesP = many tripleP
