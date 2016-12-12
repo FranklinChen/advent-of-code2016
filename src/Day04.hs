@@ -53,7 +53,7 @@ calculateChecksum =
   >>> map (\c -> (Char.ord c, 1))          -- convert letter Int, count 1
   >>> Map.fromListWith (+)                 -- sum up counts for each
   >>> Map.toList                           -- [(c, count), ...]
-  >>> List.sortBy (compare `on` ourOrder)  -- sort by most common letters
+  >>> List.sortOn ourOrder                 -- sort by most common letters
   >>> take 5                               -- 5 most common
   >>> map fst                              -- [c, ...]
   >>> map Char.chr                         -- get back chars
