@@ -11,7 +11,6 @@ import qualified Data.IntMap.Strict as Map
 import qualified Data.List as List
 import qualified Data.Char as Char
 import qualified Data.Ord as Ord
-import Data.Function (on)
 
 main :: IO Integer
 main = do
