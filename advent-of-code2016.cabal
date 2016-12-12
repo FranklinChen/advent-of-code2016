@@ -20,6 +20,9 @@ library
   build-depends:       base >= 4.7 && < 5
                      , megaparsec
                      , containers
+                     , cryptohash
+                     , bytestring
+                     , base16-bytestring
 
 test-suite spec
   default-language:    Haskell2010
@@ -33,6 +36,9 @@ test-suite spec
                      , QuickCheck
                      , megaparsec
                      , containers
+                     , cryptohash
+                     , bytestring
+                     , base16-bytestring
                      
 source-repository head
   type:     git
