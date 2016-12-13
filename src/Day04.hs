@@ -2,7 +2,7 @@ module Day04 where
 
 import Control.Arrow ((>>>))
 
-import Text.Megaparsec (parseMaybe, many, some)
+import Text.Megaparsec (parseMaybe, many, some, between)
 import Text.Megaparsec.Char (char, lowerChar, newline)
 import Text.Megaparsec.String (Parser)
 import qualified Text.Megaparsec.Lexer as L
@@ -36,7 +36,7 @@ roomP :: Parser Room
 roomP = Room <$>
         some (lowerChars <* char '-')
         <*> L.integer
-        <*> (char '[' *> lowerChars <* char ']')
+        <*> between (char '[') (char ']') lowerChars
 
 lowerChars :: Parser String
 lowerChars = some lowerChar

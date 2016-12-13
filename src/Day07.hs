@@ -2,11 +2,12 @@ module Day07 where
 
 import Control.Arrow ((>>>))
 
-import Text.Megaparsec (parseMaybe, some, (<|>))
+import Text.Megaparsec (parseMaybe, some, (<|>), between)
 import Text.Megaparsec.Char (noneOf, char, newline)
 import Text.Megaparsec.String (Parser)
 
 import qualified Data.List as List
+import qualified Data.Either as Either
 
 main :: IO Int
 main = do
@@ -23,7 +24,7 @@ unbracketedP :: Parser Segment
 unbracketedP = Unbracketed <$> segmentP
 
 bracketedP :: Parser Segment
-bracketedP = Bracketed <$> (char '[' *> segmentP <* char ']')
+bracketedP = Bracketed <$> between (char '[') (char ']') segmentP
 
 segmentP :: Parser String
 segmentP = some (noneOf "[]\n")
@@ -42,17 +43,14 @@ data Segment = Unbracketed String
 -- | Must be at least one unbracketed ABBA but no bracketed ABBA.
 supportsTLS :: IP -> Bool
 supportsTLS ip =
-  let (unbracketed, bracketed) = List.partition isUnbracketed ip
-  in any hasABBA (map unwrap unbracketed)
-     && all (hasABBA >>> not) (map unwrap bracketed)
+  let (unbracketed, bracketed) = Either.partitionEithers (map toEither ip)
+  in any hasABBA unbracketed
+     && all (hasABBA >>> not) bracketed
 
-isUnbracketed :: Segment -> Bool
-isUnbracketed (Unbracketed _) = True
-isUnbracketed _ = False
-
-unwrap :: Segment -> String
-unwrap (Unbracketed s) = s
-unwrap (Bracketed s) = s
+-- | For partitioning.
+toEither :: Segment -> Either String String
+toEither (Unbracketed s) = Left s
+toEither (Bracketed s) = Right s
 
 -- | Use a sliding window to determine whether there is any four-char
 -- sequence ABBA.
