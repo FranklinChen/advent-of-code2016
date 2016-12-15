@@ -4,31 +4,29 @@ module Day05 where
 
 import Control.Arrow ((>>>))
 
-import qualified Crypto.Hash.MD5 as MD5
+import qualified Crypto.Hash as Hash
 
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy as L
 import qualified Data.ByteString.Builder as Builder
 import Data.Semigroup ((<>))
 import Data.Maybe (mapMaybe)
+import qualified Data.List as List
 
-main :: IO B.ByteString
+main :: IO String
 main = return (password "ojvtpuvg")
 
 -- | Look for hex hashes starting with 5 zeros, and collect the 6th
 -- character for the first 8 instances.
-password :: B.ByteString -> B.ByteString
+password :: B.ByteString -> String
 password =
   ids
-  >>> mapMaybe (hexHash >>> L.stripPrefix "00000")
-  >>> map L.head
+  >>> mapMaybe (hashlazy >>> show >>> List.stripPrefix "00000")
+  >>> map head
   >>> take 8
-  >>> B.pack
 
-hexHash :: L.ByteString -> L.ByteString
-hexHash = MD5.hashlazy
-          >>> Builder.byteStringHex
-          >>> Builder.toLazyByteString
+hashlazy :: L.ByteString -> Hash.Digest Hash.MD5
+hashlazy = Hash.hashlazy
 
 -- | Generate all possible ids in order.
 ids :: B.ByteString -> [L.ByteString]

@@ -20,7 +20,7 @@ library
   build-depends:       base >= 4.7 && < 5
                      , megaparsec
                      , containers
-                     , cryptohash
+                     , cryptonite
                      , bytestring
                      , matrices
 
@@ -36,7 +36,7 @@ test-suite spec
                      , QuickCheck
                      , megaparsec
                      , containers
-                     , cryptohash
+                     , cryptonite
                      , bytestring
                      , matrices
                      

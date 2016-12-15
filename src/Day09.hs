@@ -4,7 +4,7 @@ import Control.Arrow ((>>>))
 
 import Text.Megaparsec
   ( parse, parseErrorPretty
-  , many, optional, satisfy, count, char, anyChar, eof, (<|>)
+  , many, satisfy, count, char, anyChar, eof, (<|>)
   )
 import Text.Megaparsec.String (Parser)
 import qualified Text.Megaparsec.Lexer as L
