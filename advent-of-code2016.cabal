@@ -1,8 +1,13 @@
+-- This file has been generated from package.yaml by hpack version 0.18.1.
+--
+-- see: https://github.com/sol/hpack
+
 name:                advent-of-code2016
 version:             0.1.0.0
 synopsis:            Advent of Code 2016
 description:         Please see README.md
 homepage:            http://github.com/FranklinChen/advent-of-code2016
+bug-reports:         https://github.com/FranklinChen/advent-of-code2016/issues
 license:             BSD3
 license-file:        LICENSE
 author:              Franklin Chen
@@ -10,36 +15,66 @@ maintainer:          franklinchen@franklinchen.com
 copyright:           2015
 category:            test
 build-type:          Simple
-extra-source-files:  README.md
-cabal-version:       >=1.10
+cabal-version:       >= 1.10
+
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/FranklinChen/advent-of-code2016
 
 library
-  default-language:    Haskell2010
-  ghc-options:         -Wall
-  hs-source-dirs:      src
-  build-depends:       base >= 4.7 && < 5
-                     , megaparsec
-                     , containers
-                     , cryptonite
-                     , bytestring
-                     , matrices
+  default-language: Haskell2010
+  ghc-options: -Wall
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , megaparsec
+    , containers
+    , cryptonite
+    , bytestring
+    , matrices
+  exposed-modules:
+      Day01
+      Day02
+      Day03
+      Day04
+      Day05
+      Day06
+      Day07
+      Day08
+      Day09
+      Day10
+  other-modules:
+      Paths_advent_of_code2016
 
 test-suite spec
-  default-language:    Haskell2010
-  ghc-options:         -Wall
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-                     , src
-  main-is:             Spec.hs
-  build-depends:       base
-                     , hspec
-                     , QuickCheck
-                     , megaparsec
-                     , containers
-                     , cryptonite
-                     , bytestring
-                     , matrices
-                     
-source-repository head
-  type:     git
-  location: https://github.com/FranklinChen/advent-of-code2016
+  default-language: Haskell2010
+  ghc-options: -Wall
+  type: exitcode-stdio-1.0
+  hs-source-dirs:
+      test
+  main-is: Spec.hs
+  build-depends:
+      base >=4.7 && <5
+    , megaparsec
+    , containers
+    , cryptonite
+    , bytestring
+    , matrices
+    , advent-of-code2016
+    , hspec
+    , QuickCheck
+  other-modules:
+      Day01Spec
+      Day02Spec
+      Day03Spec
+      Day04Spec
+      Day05Spec
+      Day06Spec
+      Day07Spec
+      Day08Spec
+      Day09Spec
+      Day10Spec

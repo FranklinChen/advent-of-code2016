@@ -36,6 +36,10 @@ matrix:
     compiler: ": #stack 8.0.2 osx"
     os: osx
 
+  - env: BUILD=stack ARGS="--resolver lts-9"
+    compiler: ": #stack 8.0.2 osx"
+    os: osx
+
   - env: BUILD=stack ARGS="--resolver nightly"
     compiler: ": #stack nightly osx"
     os: osx

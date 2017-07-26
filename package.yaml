@@ -1,0 +1,32 @@
+name: advent-of-code2016
+version: '0.1.0.0'
+synopsis: Advent of Code 2016
+description: Please see README.md
+category: test
+author: Franklin Chen
+maintainer: franklinchen@franklinchen.com
+copyright: '2015'
+license: BSD3
+github: FranklinChen/advent-of-code2016
+homepage: http://github.com/FranklinChen/advent-of-code2016
+extra-source-files:
+- README.md
+ghc-options: -Wall
+dependencies:
+- base >=4.7 && <5
+- megaparsec
+- containers
+- cryptonite
+- bytestring
+- matrices
+library:
+  source-dirs: src
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs:
+    - test
+    dependencies:
+    - advent-of-code2016
+    - hspec
+    - QuickCheck
