@@ -2,12 +2,15 @@ module Day07 where
 
 import Control.Arrow ((>>>))
 
-import Text.Megaparsec (parseMaybe, some, (<|>), between)
+import Control.Applicative (some, (<|>))
+import Text.Megaparsec (Parsec, parseMaybe, between)
 import Text.Megaparsec.Char (noneOf, char, newline)
-import Text.Megaparsec.String (Parser)
 
 import qualified Data.List as List
 import qualified Data.Either as Either
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO Int
 main = do

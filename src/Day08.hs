@@ -2,15 +2,18 @@ module Day08 where
 
 import Control.Arrow ((>>>))
 
-import Text.Megaparsec (parseMaybe, some, (<|>), string)
-import Text.Megaparsec.Char (char, newline)
-import Text.Megaparsec.String (Parser)
-import qualified Text.Megaparsec.Lexer as L
+import Control.Applicative (some, (<|>))
+import Text.Megaparsec (Parsec, parseMaybe)
+import Text.Megaparsec.Char (char, newline, string)
+import qualified Text.Megaparsec.Char.Lexer as L
 
 import qualified Data.List as List
 
 import qualified Data.Matrix.Unboxed as M
 import Data.Matrix.Unboxed (Matrix, (!))
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO Int
 main = do
@@ -39,7 +42,7 @@ rotateColumnP = RotateColumn <$>
 
 -- | Assume small enough number to fit into Int.
 intP :: Parser Int
-intP = fromInteger <$> L.integer
+intP = fromInteger <$> L.decimal
 
 numLitAfterRun :: [Instruction] -> Int
 numLitAfterRun =

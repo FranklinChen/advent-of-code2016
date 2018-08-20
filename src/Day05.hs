@@ -9,7 +9,6 @@ import qualified Crypto.Hash as Hash
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy as L
 import qualified Data.ByteString.Builder as Builder
-import Data.Semigroup ((<>))
 import Data.Maybe (mapMaybe)
 import qualified Data.List as List
 

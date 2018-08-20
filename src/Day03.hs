@@ -2,10 +2,13 @@ module Day03 where
 
 import Control.Arrow ((>>>))
 
-import Text.Megaparsec (many, parseMaybe)
+import Control.Applicative (many)
+import Text.Megaparsec (Parsec, parseMaybe)
 import Text.Megaparsec.Char (space, newline)
-import Text.Megaparsec.String (Parser)
-import qualified Text.Megaparsec.Lexer as L
+import qualified Text.Megaparsec.Char.Lexer as L
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO Int
 main = do
@@ -24,7 +27,7 @@ tripleP :: Parser (Triple Integer)
 tripleP = (,,) <$> intP <*> intP <*> intP <* newline
 
 intP :: Parser Integer
-intP = space *> L.integer
+intP = space *> L.decimal
 
 -- | In a valid triangle, the sum of any two sides must be larger than
 -- the remaining side.

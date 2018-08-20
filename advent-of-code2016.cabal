@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3cbc8cfa2532b92ff4cd527cf453f741621f98b37d69284fae6606ea9bb8a972
+-- hash: 863020d6ab386872cff2bee7f9b6e60c78cebc8fe79c7548d63c9670d969fbfb
 
 name:                advent-of-code2016
 version:             0.1.0.0
@@ -36,7 +36,7 @@ library
     , containers
     , cryptonite
     , matrices
-    , megaparsec
+    , megaparsec >=6.0.0
   exposed-modules:
       Day01
       Day02
@@ -67,7 +67,7 @@ test-suite spec
     , cryptonite
     , hspec
     , matrices
-    , megaparsec
+    , megaparsec >=6.0.0
   other-modules:
       Day01Spec
       Day02Spec

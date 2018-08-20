@@ -3,10 +3,13 @@ module Day01 where
 import Control.Arrow ((>>>))
 import Data.List (foldl')
 
-import Text.Megaparsec ((<|>), sepBy, parseMaybe)
+import Control.Applicative ((<|>))
+import Text.Megaparsec (Parsec, sepBy, parseMaybe)
 import Text.Megaparsec.Char (char, space)
-import Text.Megaparsec.String (Parser)
-import qualified Text.Megaparsec.Lexer as L
+import qualified Text.Megaparsec.Char.Lexer as L
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO Int
 main = do
@@ -31,7 +34,7 @@ turnP = char 'L' *> pure L
     <|> char 'R' *> pure R
 
 forwardP :: Parser Int
-forwardP = fromInteger <$> L.integer
+forwardP = fromInteger <$> L.decimal
 
 -- | Which way to turn, then how many blocks forward to move.
 type Segment = (Turn, Int)

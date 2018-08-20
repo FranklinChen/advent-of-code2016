@@ -2,14 +2,18 @@ module Day09 where
 
 import Control.Arrow ((>>>))
 
+import Control.Applicative (many, (<|>))
 import Text.Megaparsec
-  ( parse, parseErrorPretty
-  , many, satisfy, count, char, anyChar, eof, (<|>)
+  ( Parsec, parse, parseErrorPretty
+  , count, eof
   )
-import Text.Megaparsec.String (Parser)
-import qualified Text.Megaparsec.Lexer as L
+import Text.Megaparsec.Char (satisfy, char, anyChar)
+import qualified Text.Megaparsec.Char.Lexer as L
 
 import qualified Data.Char as Char
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO Int
 main = (decompress >>> length) <$> readFile "inputs/day09.txt"
@@ -59,4 +63,4 @@ markerP = (,) <$>
   <*> intP <* char ')'
 
 intP :: Parser Int
-intP = fromInteger <$> L.integer
+intP = fromInteger <$> L.decimal

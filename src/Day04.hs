@@ -2,15 +2,18 @@ module Day04 where
 
 import Control.Arrow ((>>>))
 
-import Text.Megaparsec (parseMaybe, many, some, between)
+import Control.Applicative (many, some)
+import Text.Megaparsec (Parsec, parseMaybe, between)
 import Text.Megaparsec.Char (char, lowerChar, newline)
-import Text.Megaparsec.String (Parser)
-import qualified Text.Megaparsec.Lexer as L
+import qualified Text.Megaparsec.Char.Lexer as L
 
 import qualified Data.IntMap.Strict as Map
 import qualified Data.List as List
 import qualified Data.Char as Char
 import qualified Data.Ord as Ord
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO Integer
 main = do
@@ -35,7 +38,7 @@ roomsP = many (roomP <* newline)
 roomP :: Parser Room
 roomP = Room <$>
         some (lowerChars <* char '-')
-        <*> L.integer
+        <*> L.decimal
         <*> between (char '[') (char ']') lowerChars
 
 lowerChars :: Parser String

@@ -3,11 +3,14 @@ module Day02 where
 import Control.Arrow ((>>>))
 import Data.List (scanl', foldl')
 
-import Text.Megaparsec ((<|>), some, parseMaybe)
+import Control.Applicative ((<|>), some)
+import Text.Megaparsec (Parsec, parseMaybe)
 import Text.Megaparsec.Char (char, newline)
-import Text.Megaparsec.String (Parser)
 
 import Data.Char (intToDigit)
+import Data.Void (Void)
+
+type Parser = Parsec Void String
 
 main :: IO String
 main = do
